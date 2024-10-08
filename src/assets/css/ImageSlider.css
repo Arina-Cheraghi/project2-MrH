@@ -1,0 +1,57 @@
+/* ImageSlider.css */
+.slider-container {
+  position: relative;
+}
+
+.slider {
+  margin-top: 150px;
+}
+
+.slide {
+  position: relative;
+}
+
+.prev-btn,
+.next-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.7); /* رنگ پس‌زمینه نیمه‌شفاف */
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1; /* قرار دادن دکمه‌ها بالای تصاویر */
+}
+
+.prev-btn {
+  left: 10px; /* فاصله از سمت چپ */
+}
+
+.next-btn {
+  right: 10px; /* فاصله از سمت راست */
+}
+
+.slick-dots {
+  position: absolute; /* قرار دادن نقطه‌ها به صورت مطلق */
+  bottom: 20px; /* فاصله از پایین تصویر */
+  left: 50%; /* وسط صفحه */
+  transform: translateX(-50%); /* مرکز کردن */
+  z-index: 10; /* قرار دادن روی سایر عناصر */
+}
+
+.slick-dots li {
+  margin: 0 5px; /* فاصله بین نقطه‌ها */
+}
+
+.slick-dots li button {
+  background-color: aqua;
+  border-radius: 50%; /* دایره‌ای کردن */
+  width: 10px; /* اندازه نقطه‌ها */
+  height: 10px;
+  opacity: 0.5; /* شفافیت نقطه‌ها */
+}
+
+.slick-dots li.slick-active button {
+  opacity: 1; /* شفافیت نقطه فعال */
+  background-color: #ed1ce7;
+}

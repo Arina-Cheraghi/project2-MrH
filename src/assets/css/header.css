@@ -1,0 +1,287 @@
+.col-1 {
+  width: 8.33%;
+}
+.col-2 {
+  width: 16.66%;
+}
+.col-3 {
+  width: 25%;
+}
+.col-4 {
+  width: 33.33%;
+}
+.col-5 {
+  width: 41.66%;
+}
+.col-6 {
+  width: 50%;
+}
+.col-7 {
+  width: 58.33%;
+}
+.col-8 {
+  width: 66.66%;
+}
+.col-9 {
+  width: 75%;
+}
+.col-10 {
+  width: 83.33%;
+}
+.col-11 {
+  width: 91.66%;
+}
+.col-12 {
+  width: 100%;
+}
+
+/* header */
+.header {
+  direction: rtl;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: #171420;
+  color: #31eee8;
+  position: fixed; /* هدر را ثابت می‌کند */
+  top: 0; /* هدر در بالای صفحه قرار می‌گیرد */
+  left: 0; /* هدر از سمت چپ صفحه شروع می‌شود */
+  right: 0;
+  z-index: 2;
+}
+.header .rightSide {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 90%;
+  margin: 10px auto;
+}
+
+.rightSide .Hdetails{
+  display: flex;
+  align-items: flex-start;
+  font-size: .9rem;
+  flex-direction: column;
+  margin: 5px;
+}
+
+.rightSide .Hdetails h5{
+  margin: 5px auto;
+  padding: 1px auto;
+  text-align: right;
+}
+.rightSide .Hdetails h6{
+  margin: 0;
+  padding: 1px auto;
+  text-align: right;
+
+}
+
+.header .rightSide .shoppingCart a{
+  display: flex;
+  align-items: center;
+}
+
+.header a {
+  color: #31eee8;
+  text-decoration: none;
+  font-size: 1rem;
+}
+h5 {
+  text-shadow: 0px 0px 4px #31eee8;
+  margin: 10px;
+}
+
+.logo {
+  width: 30%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+.logo img {
+  width: 40%;
+}
+
+.account {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  cursor: pointer;
+}
+
+.shoppingCart {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.leftSide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchBox {
+  position: relative;
+  width: 300px;
+}
+
+.input {
+  font-family: Vazir;
+  background-color: #171420;
+  width: 80%;
+  padding: 10px 20px 10px 10px;
+  border: 1px solid #ed1ce7;
+  border-radius: 20px;
+}
+
+.input::placeholder {
+  color: #31eee8;
+}
+
+.icon {
+  position: absolute;
+  left: 40px; /* فاصله از سمت چپ */
+  top: 50%;
+  transform: translateY(-50%); /* مرکز کردن عمودی */
+  /* pointer-events: none;  */
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 700px) {
+  .logo {
+    width: 80%;
+    align-items: center;
+  }
+  .rightSide {
+    margin: 40px auto;
+  }
+  .rightSide h5 {
+    display: none;
+  }
+}
+
+/* menu wrapper */
+
+.Wrap-out {
+  background-color: #100e16;
+  margin: 0;
+  padding: 0;
+  position: fixed; /* هدر را ثابت می‌کند */
+  top: 80px; /* هدر در بالای صفحه قرار می‌گیرد */
+  left: 0; /* هدر از سمت چپ صفحه شروع می‌شود */
+  right: 0;
+  z-index: 1;
+}
+.wrapper {
+  direction: rtl;
+  display: flex;
+  width: 70%;
+  margin: 0.5% auto;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.box-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid #100e16;
+}
+
+.box-item a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #31eee8;
+}
+
+.box-item:hover {
+  border-bottom: 2px solid #31eee8;
+}
+
+
+.rightSide .shoppingCart {
+  position: relative; /* برای موقعیت‌دهی نسبی */
+}
+
+.cart-count {
+  position: absolute; /* برای موقعیت‌دهی مطلق */
+  top: 0px; /* فاصله از بالا */
+  right: -10px; /* فاصله از راست */
+  background-color: aqua; /* رنگ پس‌زمینه */
+  color: black; /* رنگ متن */
+  border-radius: 50%; /* گرد کردن */
+  padding: .5px 6px; /* فضای داخلی */
+  font-size: 12px; /* اندازه فونت */
+}
+
+
+@media only screen and (max-width: 700px) {
+  .Wrap-out {
+    top: 70px;
+    z-index: 0;
+    position: relative;
+  }
+  .box-item {
+    padding: 20px;
+  }
+  .box-item h6 {
+    display: none;
+  }
+  .box-item {
+    margin: 20px auto;
+  }
+}
+
+
+
+.sidebar {
+  width: 6%;
+  min-width: 70px;
+  position: absolute;
+  z-index: 2;
+  top: 65px; /* Adjust based on your header height */
+  right: 5%;
+  background-color: white; /* or your desired background color */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+  opacity: 0;
+  transform: translateY(-50px); /* Start position for slide down */
+  visibility: hidden; /* Start hidden */
+}
+
+.sidebar.show {
+  background-color: #100e16;
+  border: 2px solid #31eee8;
+  opacity: 1;
+  z-index: 2;
+  transform: translateY(0); /* End position */
+  visibility: visible; /* Make it visible */
+  border-radius: 10px;
+}
+
+.sidebar.show hr{
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar.show a{
+  font-size: .8rem;
+  margin: 2%;
+}
+
+.sidebar-link {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 10px;
+  text-decoration: none;
+  color: #31eee8; /* Adjust link color */
+}

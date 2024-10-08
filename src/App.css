@@ -1,0 +1,23 @@
+ @import "./assets//font/css/all.css";
+
+@font-face {
+  font-family: "Vazir";
+  src: url("./assets//font/css/vazir-font-v18.0.0/Vazir-Medium.woff2") format("woff2"),
+    url("./assets//font/css/vazir-font-v18.0.0/Vazir-Medium.woff") format("woff"),
+    url("./assets//font/css/vazir-font-v18.0.0/Vazir-Medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.all{
+  font-family: Vazir;
+  background-color: #100e16;
+}
+
+
+
+
+
+
+
+

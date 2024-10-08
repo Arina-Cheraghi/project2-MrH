@@ -1,0 +1,186 @@
+.col-1 {
+  width: 8.33%;
+}
+.col-2 {
+  width: 16.66%;
+}
+.col-3 {
+  width: 25%;
+}
+.col-4 {
+  width: 33.33%;
+}
+.col-5 {
+  width: 41.66%;
+}
+.col-6 {
+  width: 50%;
+}
+.col-7 {
+  width: 58.33%;
+}
+.col-8 {
+  width: 66.66%;
+}
+.col-9 {
+  width: 75%;
+}
+.col-10 {
+  width: 83.33%;
+}
+.col-11 {
+  width: 91.66%;
+}
+.col-12 {
+  width: 100%;
+}
+
+.background {
+  position: relative;
+  overflow: hidden; /* اطمینان از اینکه عنصر شبه خارج از دیو نمی‌رود */
+  height: 100vh; /* ارتفاع را به دلخواه تنظیم کنید */
+}
+
+.background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url(../img/backgroundSignUp.jpg) no-repeat center;
+  background-size: cover;
+  filter: blur(10px); /* مقدار بلور را به دلخواه تنظیم کنید */
+  z-index: 0; /* در پشت محتوای اصلی قرار گیرد */
+}
+
+.background > * {
+  position: relative; /* محتوای داخل دیو در بالای پس‌زمینه قرار گیرد */
+  z-index: 1; /* اطمینان از اینکه محتوا بالای پس‌زمینه بلور شده باشد */
+}
+
+.main-box {
+  direction: rtl;
+  display: flex;
+  justify-content: center;
+  margin: 5% auto;
+}
+
+.card {
+  width: 30%;
+  background-color: #241f32;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  margin: 0px auto;
+}
+
+.card a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
+  color: white;
+  width: 30%;
+  justify-content: space-evenly;
+}
+
+.card .myLogo {
+  display: flex;
+  justify-content: center;
+}
+
+.card .myLogo img {
+  width: 35%;
+}
+
+.card-get {
+  padding: 10px;
+
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  justify-content: center;
+  gap: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 5% 0;
+  width: 100%;
+}
+
+form label {
+  margin: 10px 0;
+  color: rgba(188, 187, 187, 0.641);
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+form input {
+  padding: 5px;
+  border: 2px solid white; /* حاشیه سفید در حالت عادی */
+  background-color: #241f32;
+  border-radius: 5px;
+  color: white;
+  transition: border-color 0.3s;
+  font-size: 18px;
+}
+form input:focus {
+  border-color: aqua; /* تغییر رنگ حاشیه به aqua در حالت فوکوس */
+  outline: none; /* حذف outline پیش‌فرض */
+}
+
+form button {
+  margin: 10px auto;
+  padding: 7px;
+  width: 40%;
+  border-radius: 5px;
+  border: none;
+  font-family: Vazir;
+  background-color: aqua;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  box-shadow: 1px 7px 17px -2px rgba(255, 255, 255, 0.49);
+  -webkit-box-shadow: 1px 7px 17px -2px rgba(255, 255, 255, 0.49);
+  -moz-box-shadow: 1px 7px 17px -2px rgba(255, 255, 255, 0.49);
+}
+
+@media only screen and (max-width: 900px) {
+  .card {
+    margin-top: 5%;
+    width: 70% !important;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .card-inf .main-box {
+    margin-top: 0 !important;
+  }
+}
+
+.main-box input {
+  font-family: Vazir;
+  font-size: 0.7rem;
+}
+.card-inf .main-box {
+  margin-top: 7%;
+}
+
+.error-message {
+  display: flex;
+  justify-content: center;
+  color: rgb(255, 0, 64);
+  font-size: 0.8rem;
+}
+
+#phone{
+  width: 100% !important;
+}

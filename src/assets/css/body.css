@@ -1,0 +1,382 @@
+.col-1 {
+  width: 8.33%;
+}
+.col-2 {
+  width: 16.66%;
+}
+.col-3 {
+  width: 25%;
+}
+.col-4 {
+  width: 33.33%;
+}
+.col-5 {
+  width: 41.66%;
+}
+.col-6 {
+  width: 50%;
+}
+.col-7 {
+  width: 58.33%;
+}
+.col-8 {
+  width: 66.66%;
+}
+.col-9 {
+  width: 75%;
+}
+.col-10 {
+  width: 83.33%;
+}
+.col-11 {
+  width: 91.66%;
+}
+.col-12 {
+  width: 100%;
+}
+.prdOut {
+  direction: rtl;
+  background-color: #100e16;
+  color: aqua;
+}
+.myProducts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  margin: auto;
+  direction: rtl;
+}
+
+.myProducts h1 {
+  text-shadow: -1px 22px 6px rgba(49, 238, 232, 0.6);
+}
+
+.productWrapper {
+  display: flex;
+  justify-content: space-evenly;
+}
+.myImage {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  /* justify-content: center; */
+}
+.productWrapper img {
+  width: 90%;
+}
+
+.show_more {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.show_more a {
+  text-decoration: none;
+  background-color: #100e16;
+  border: none;
+  color: aqua;
+  cursor: pointer;
+  font-family: Vazir;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  padding: 10px 5px;
+  border-radius: 10px;
+}
+
+.show_more a:hover {
+  background-color: #241f32;
+  color: #ed1ce7;
+}
+
+.myProducts .productItems ul {
+  display: flex;
+  /* flex-wrap: wrap; */
+  list-style-type: none;
+}
+
+.myProducts .productItems ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.myProducts .productItems ul li {
+  min-height: 440px;
+  position: relative; /* برای استفاده از ::before */
+  padding: 10% 5%;
+  background-color: #241f32;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 80%;
+  cursor: pointer;
+  border-radius: 5px;
+  /* overflow: hidden; جلوگیری از نمایش حاشیه‌های اضافی */
+}
+
+.myProducts .productItems ul li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid aqua; /* رنگ حاشیه */
+  z-index: -1; /* حاشیه در زیر عنصر */
+  transition: all 0.5s ease; /* ترنزیشن */
+}
+
+.myProducts .productItems ul li::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px; /* ارتفاع خط */
+  width: 0; /* شروع از حالت مخفی */
+  background: aqua; /* رنگ خط */
+  z-index: 1; /* در بالای حاشیه */
+  transition: width 0.5s ease; /* ترنزیشن */
+}
+
+.myProducts .productItems ul li:hover::after {
+  width: 100%; /* خط به عرض کامل می‌رسد */
+}
+
+.myProducts .productItems ul li:hover::before {
+  transition: none; /* جلوگیری از ترنزیشن حاشیه */
+}
+
+.myProducts .productItems ul li img {
+  max-height: 200px;
+}
+.myProducts .productItems ul li h4 {
+  font-size: 0.9rem;
+  font-weight: 100;
+}
+
+.myProducts .productItems ul li h6 span {
+  color: #ed1ce7;
+  font-size: 1rem;
+  font-weight: 200;
+}
+
+.product-title {
+  width: 100%; /* عرض عنصر را مشخص کنید */
+  max-width: 200px;
+  display: flex;
+  justify-content: center;
+  font-weight: 200;
+  font-size: 0.8rem;
+}
+
+.description {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+
+.description p {
+  font-size: 0.8rem;
+}
+
+.description .icons {
+  display: flex;
+  width: 75%;
+  justify-content: space-evenly;
+}
+
+.description .icons button {
+  color: aqua;
+  background:none;
+  border: 2px dotted aqua;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 20 px;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+}
+
+.description .icons button:hover{
+  background-color: aqua;
+  color: #241f32;
+  border: 2px dotted #100e16;
+}
+
+/* .description .icons button:active{
+scale: 2rem;
+} */
+
+.pag {
+  display: flex;
+  width: 100%;
+  direction: ltr;
+}
+.pag ul {
+  padding: 0;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin: auto;
+  list-style-type: none;
+  border: 1px dashed #ed1ce7;
+  border-radius: 5px;
+}
+
+.pag li {
+  padding: 5px 10px;
+  margin: 0;
+  border-radius: 100%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.pag li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pag li:hover {
+  background-color: aqua;
+  color: #ed1ce7;
+}
+
+.loading {
+  margin-top: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  font-size: 24px; /* اندازه متن */
+  color: #ed1ce7; /* رنگ متن */
+  position: relative;
+}
+
+.loading::after {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 5px solid #f3f3f3; /* رنگ پس‌زمینه */
+  border-top: 5px solid #ed1ce7; /* رنگ بار */
+  border-radius: 50%;
+  animation: spin 1s linear infinite; /* انیمیشن چرخش */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.errorMessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ed1ce7;
+  height: 100px;
+}
+
+
+/* .selected-page {
+  background-color: aqua;
+  color: #241f32;
+} */
+
+@media only screen and (max-width: 700px) {
+  .productWrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .productItems {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .productItems ul {
+    flex-direction: column;
+  }
+
+  .productItems ul li {
+    width: 15rem !important;
+  }
+  .productItems ul li img {
+    width: 80% !important;
+    border-radius: 10px;
+    border: none;
+  }
+  .description {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .description .icons {
+    width: 100%;
+  }
+  .description p {
+    text-align: center;
+    font-size: 0.6rem;
+  }
+
+  .pag ul {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+.page2 {
+  margin-top: 200px;
+}
+
+.page2 ul {
+  flex-wrap: wrap;
+}
+
+.page2 .range{
+  height: 100%;
+  position: relative;
+}
+
+.page2 #range-slider{
+  font-family: Vazir;
+}
+
+.page2 .show-op, 
+.page2 .res-range{
+  font-size: .8rem;
+}
+
+.page2 .show-op{
+  color: #ed1ce7;
+}
+
+.page2 .range-in{
+  top: 200px;
+  right: 10px;
+  background-color: #241f32;
+  border-radius: 10px;
+  padding: 2% 1%;
+  display: flex;
+  width: 22%;
+  flex-direction: column;
+  justify-content: space-evenly;
+  position: fixed;
+  margin: auto;
+}
+
+.page2 .range-in div{
+  margin: 10px 0;}
