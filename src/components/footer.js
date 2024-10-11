@@ -17,76 +17,66 @@ const Footer = () => {
         <div id="footer">
             <div className="col-12">
                 <div className="footer">
-                    <div className="col-3">
-                        <div className="box">
-                            <div className="title">
-                                <h4 className="icons"><MdOutlineLink /></h4>
-                                <h4>لینک های سریع</h4>
-                            </div>
-                            <div className="options">
-                                <a href="#">
-                                    صفحه اصلی</a>
-                                <a href="#">اکشن فیگور</a>
-                                <a href="#"> انیمه</a>
-                                <a href="#">تماس با ما</a>
-                                <a href="#">قوانین</a>
-                            </div>
+                    <div className="box">
+                        <div className="title">
+                            <h4 className="icons"><MdOutlineLink /></h4>
+                            <h4>لینک های سریع</h4>
+                        </div>
+                        <div className="options">
+                            <a href="#">
+                                صفحه اصلی</a>
+                            <a href="#">اکشن فیگور</a>
+                            <a href="#"> انیمه</a>
+                            <a href="#">تماس با ما</a>
+                            <a href="#">قوانین</a>
                         </div>
                     </div>
-                    <div className="col-3">
-                        <div className="box contact">
-                            <div className="title">
-                                <h4 className="icons"><FaPhoneVolume /></h4>
-                                <h4>ارتباط با ما</h4>
-                            </div>
-                            <div className="options">
-                                <a href="#">
-                                    <p><FaMobileAlt /></p>
-                                    <p>09010313531</p>
-                                </a>
-                                <a href="#">
-                                    <p><FaMobileAlt /></p>
-                                    <p>09010313531</p>
-                                </a>
-                            </div>
-                            <div className="address">
-                                <p>استان البرز ، کرج-عظیمیه-میدان مهران-برج ماندگار-طبقه منفی 3 واحد 13</p>
-                            </div>
+                    <div className="box contact">
+                        <div className="title">
+                            <h4 className="icons"><FaPhoneVolume /></h4>
+                            <h4>ارتباط با ما</h4>
                         </div>
-
-                    </div>
-                    <div className="col-3">
-                        <div className="box media">
-                            <div className="title">
-                                <h4 className="icons"><IoMdShare /></h4>
-                                <h4>شبکه های اجتماعی</h4>
-                            </div>
-                            <div className="options">
-                                <a href="#">
-                                    <p><FaWhatsapp /></p>
-                                </a>
-                                <a href="#">
-                                    <p><LiaTelegramPlane /></p>
-                                </a>
-                                <a href="#">
-                                    <p><FaInstagram /></p>
-                                </a>
-                            </div>
+                        <div className="options">
+                            <a href="#">
+                                <p><FaMobileAlt /></p>
+                                <p>09010313531</p>
+                            </a>
+                            <a href="#">
+                                <p><FaMobileAlt /></p>
+                                <p>09010313531</p>
+                            </a>
                         </div>
-
+                        <div className="address">
+                            <p>استان البرز ، کرج-عظیمیه-میدان مهران-برج ماندگار-طبقه منفی 3 واحد 13</p>
+                        </div>
                     </div>
-                    <div className="col-3">
-                        <div className="about">
-                            <div className="logo">
-                                <div>
-                                    <img src={logo}></img>
-                                </div>
-
+                    <div className="box media">
+                        <div className="title">
+                            <h4 className="icons"><IoMdShare /></h4>
+                            <h4>شبکه های اجتماعی</h4>
+                        </div>
+                        <div className="options">
+                            <a href="#">
+                                <p><FaWhatsapp /></p>
+                            </a>
+                            <a href="#">
+                                <p><LiaTelegramPlane /></p>
+                            </a>
+                            <a href="#">
+                                <p><FaInstagram /></p>
+                            </a>
+                        </div>
+                    </div>
+                    <div className="box about">
+                        <div className="logo">
+                            <div>
+                                <img src={logo}></img>
                             </div>
-                                <div className="pay">
-                                    <img src={zarin}></img>
-                                    <img src={etemad}></img>
-                                </div>
+
+                        </div>
+                        <div className="pay">
+                            <img src={zarin}></img>
+                            <img src={etemad}></img>
                         </div>
                     </div>
                 </div>

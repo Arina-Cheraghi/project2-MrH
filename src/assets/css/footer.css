@@ -39,14 +39,35 @@
   position: relative;
   direction: rtl;
   background: url(../img/footerBG.cdf56d3b.jpg) no-repeat;
-  margin: 2% 0 ;
-  height: 360px;
+  margin: 2% 0;
+  height: 400px;
 }
+
+@media only screen and (max-width: 1003px) {
+  #footer {
+    position: relative;
+    direction: rtl;
+    background: url(../img/footerBG.cdf56d3b.jpg) repeat-y;
+    margin: 2% 0;
+    height: 100vh;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  #footer {
+    position: relative;
+    direction: rtl;
+    background: url(../img/footerBG.cdf56d3b.jpg) repeat-y;
+    margin: 2% 0;
+    height: 200vh;
+  }
+}
+
 .footer {
+  flex-wrap: wrap;
   display: flex;
-  /* width: 95%; */
-  /* color: aliceblue; */
-  background-color: rgba(0, 0, 0, 0.86); /* رنگ سیاه با شفافیت 0.5 */
+  justify-content: space-evenly;
+  background-color: rgba(0, 0, 0, 0.86);
   position: absolute;
   top: 0;
   left: 0;
@@ -57,11 +78,23 @@
 .footer .box {
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
   border: 4px dotted #ed1ce7;
-  margin: 4%;
+  margin: 1%;
   padding: 1%;
   border-radius: 10px;
+  min-width: 200px;
+  max-width: 200px;
+}
+
+@media only screen and (max-width: 700px) {
+  .box {
+    font-size: .8rem;
+  }
+  .box .title h4 {
+    font-size: 1rem !important;
+  }
 }
 
 .footer .box h4 {
@@ -94,8 +127,8 @@
   border-bottom: 2px solid white;
 }
 
-.footer .contact .options a{
-    margin: 4px 0 !important;
+.footer .contact .options a {
+  margin: 4px 0 !important;
 }
 
 .footer .contact .address {
@@ -118,25 +151,26 @@
   margin: 10px 0;
 }
 
-.media a p{
-    font-size: 2rem;
-    margin: 0;
+.media a p {
+  font-size: 2rem;
+  margin: 0;
 }
 
-.media a{
-    margin: 3px 0 !important;
+.media a {
+  margin: 3px 0 !important;
 }
 
 .about {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-.about .logo img{
-    width: 10rem;
+.about .logo img {
+  width: 10rem;
 }
 
-.about .pay{
-    display: flex;
-    justify-content: space-evenly;
+.about .pay {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }

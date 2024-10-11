@@ -8,7 +8,7 @@ import ReactPaginate from 'react-paginate';
 import { Link } from "react-router-dom";
 import { MdDone } from "react-icons/md";
 
-const ProductList = ({ handleAddProduct, handleAddFavorite, favorites  }) => {
+const ProductList = ({ handleAddProduct, handleAddFavorite, favorites }) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -90,8 +90,13 @@ const ProductList = ({ handleAddProduct, handleAddFavorite, favorites  }) => {
         }
     };
 
-    if (loading) return <div className='loading'>در حال بارگذاری...</div>;
-    if (error) return <div className='errorMessage'>خطا: {error.message}</div>;
+    if (loading) return (
+        <div className='loading'>
+            <div className='spinner'></div>
+            <div className='loader'>Loading...</div>
+        </div>
+    );
+    if (error) return <div className='errorMessage'>{error.message}</div>;
 
     const endOffset = itemOffset + itemsPerPage;
     const currentProducts = products.slice(itemOffset, endOffset);

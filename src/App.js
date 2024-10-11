@@ -23,6 +23,7 @@ const App = () => {
 
     const [name, setName] = useState(() => localStorage.getItem("name") || '');
     const [lastname, setLastName] = useState(() => localStorage.getItem("lastName") || '');
+    const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
         localStorage.setItem("cartItems", JSON.stringify(cartItems));
@@ -35,9 +36,7 @@ const App = () => {
     const handleAddProduct = (product) => {
         const productExist = cartItems.find((item) => item.id === product.product_id);
         if (productExist) {
-            setCartItems(cartItems.map((item) => item.id === product.product_id ?
-                { ...productExist, quantity: productExist.quantity + 1 } : item)
-            );
+            setCartItems(cartItems.map((item) => item.id === product.product_id ? { ...productExist, quantity: productExist.quantity + 1 } : item));
         } else {
             setCartItems([...cartItems, { ...product, quantity: 1 }]);
         }
@@ -57,6 +56,7 @@ const App = () => {
         }
     };
 
+
     const [isFirstTime, setIsFirstTime] = useState(false);
 
     return (
@@ -67,51 +67,27 @@ const App = () => {
                         path="/"
                         element={
                             <>
-                                <Header cartItems={cartItems} name={name} lastname={lastname} />
-                                <Body handleAddProduct={handleAddProduct} handleAddFavorite={handleAddFavorite} favorites={favorites} />
+                                <Header
+                                    cartItems={cartItems}
+                                    name={name}
+                                    lastname={lastname}
+                                    setSearchQuery={setSearchQuery}
+                                />
+                                <Body
+                                    handleAddProduct={handleAddProduct}
+                                    handleAddFavorite={handleAddFavorite}
+                                    favorites={favorites}
+                                    searchQuery={searchQuery}
+                                />
                                 <Footer />
                             </>
                         }
                     />
-                    <Route
-                        path="/page2"
-                        element={
-                            <>
-                                <Header cartItems={cartItems} name={name} lastname={lastname} />
-                                <Page2 />
-                                <Footer />
-                            </>
-                        }
-                    />
-                    <Route
-                        path="/ShoppingCart"
-                        element={
-                            <>
-                                <Header cartItems={cartItems} name={name} lastname={lastname} />
-                                <ShoppingCart cartItems={cartItems} />
-                                <Footer />
-                            </>
-                        }
-                    />
-                    <Route
-                        path="/panel"
-                        element={<Panel name={name} setName={setName} lastname={lastname} setLastName={setLastName} favorites={favorites} handleAddFavorite={handleAddFavorite} />}
-                    />
-                    <Route
-                        path="/Login"
-                        element={<Login />}
-                    />
-                    <Route
-                        path="/Verify"
-                        element={
-                            <Verify
-                                setIsFirstTime={setIsFirstTime}
-                                isFirstTime={isFirstTime}
-                                setName={setName}
-                                setLastName={setLastName}
-                            />
-                        }
-                    />
+                    <Route path="/page2" element={<> <Header cartItems={cartItems} name={name} lastname={lastname} /> <Page2 /> <Footer /> </>} />
+                    <Route path="/ShoppingCart" element={<> <Header cartItems={cartItems} name={name} lastname={lastname} /> <ShoppingCart cartItems={cartItems} /> <Footer /> </>} />
+                    <Route path="/panel" element={<Panel name={name} setName={setName} lastname={lastname} setLastName={setLastName} favorites={favorites} handleAddFavorite={handleAddFavorite} />} />
+                    <Route path="/Login" element={<Login />} />
+                    <Route path="/Verify" element={<Verify setIsFirstTime={setIsFirstTime} isFirstTime={isFirstTime} setName={setName} setLastName={setLastName} />} />
                 </Routes>
             </div>
         </BrowserRouter>

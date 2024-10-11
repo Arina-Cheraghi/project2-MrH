@@ -34,11 +34,13 @@
 .col-12 {
   width: 100%;
 }
+
 .prdOut {
   direction: rtl;
   background-color: #100e16;
   color: aqua;
 }
+
 .myProducts {
   display: flex;
   flex-direction: column;
@@ -57,14 +59,15 @@
   display: flex;
   justify-content: space-evenly;
 }
+
 .myImage {
   width: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  /* justify-content: center; */
 }
+
 .productWrapper img {
   width: 90%;
 }
@@ -96,18 +99,14 @@
 
 .myProducts .productItems ul {
   display: flex;
-  /* flex-wrap: wrap; */
-  list-style-type: none;
-}
-
-.myProducts .productItems ul {
   list-style-type: none;
   padding: 0;
 }
 
 .myProducts .productItems ul li {
+  max-height: 70px !important;
   min-height: 440px;
-  position: relative; /* برای استفاده از ::before */
+  position: relative;
   padding: 10% 5%;
   background-color: #241f32;
   margin: 10px auto;
@@ -118,7 +117,6 @@
   width: 80%;
   cursor: pointer;
   border-radius: 5px;
-  /* overflow: hidden; جلوگیری از نمایش حاشیه‌های اضافی */
 }
 
 .myProducts .productItems ul li::before {
@@ -128,9 +126,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  border: 2px solid aqua; /* رنگ حاشیه */
-  z-index: -1; /* حاشیه در زیر عنصر */
-  transition: all 0.5s ease; /* ترنزیشن */
+  border: 2px solid aqua;
+  z-index: -1;
+  transition: all 0.5s ease;
 }
 
 .myProducts .productItems ul li::after {
@@ -138,24 +136,25 @@
   position: absolute;
   top: 0;
   left: 0;
-  height: 2px; /* ارتفاع خط */
-  width: 0; /* شروع از حالت مخفی */
-  background: aqua; /* رنگ خط */
-  z-index: 1; /* در بالای حاشیه */
-  transition: width 0.5s ease; /* ترنزیشن */
+  height: 2px;
+  width: 0;
+  background: aqua;
+  z-index: 1;
+  transition: width 0.5s ease;
 }
 
 .myProducts .productItems ul li:hover::after {
-  width: 100%; /* خط به عرض کامل می‌رسد */
+  width: 100%;
 }
 
 .myProducts .productItems ul li:hover::before {
-  transition: none; /* جلوگیری از ترنزیشن حاشیه */
+  transition: none;
 }
 
 .myProducts .productItems ul li img {
   max-height: 200px;
 }
+
 .myProducts .productItems ul li h4 {
   font-size: 0.9rem;
   font-weight: 100;
@@ -168,7 +167,7 @@
 }
 
 .product-title {
-  width: 100%; /* عرض عنصر را مشخص کنید */
+  width: 100%;
   max-width: 200px;
   display: flex;
   justify-content: center;
@@ -195,30 +194,27 @@
 
 .description .icons button {
   color: aqua;
-  background:none;
+  background: none;
   border: 2px dotted aqua;
   border-radius: 5px;
   padding: 5px;
-  margin: 20 px;
+  margin: 20px;
   cursor: pointer;
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
-.description .icons button:hover{
+.description .icons button:hover {
   background-color: aqua;
   color: #241f32;
   border: 2px dotted #100e16;
 }
-
-/* .description .icons button:active{
-scale: 2rem;
-} */
 
 .pag {
   display: flex;
   width: 100%;
   direction: ltr;
 }
+
 .pag ul {
   padding: 0;
   display: flex;
@@ -252,61 +248,114 @@ scale: 2rem;
 }
 
 .loading {
-  margin-top: 100px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100px;
-  font-size: 24px; /* اندازه متن */
-  color: #ed1ce7; /* رنگ متن */
-  position: relative;
 }
 
-.loading::after {
-  content: "";
-  display: block;
-  width: 20px;
-  height: 20px;
-  border: 5px solid #f3f3f3; /* رنگ پس‌زمینه */
-  border-top: 5px solid #ed1ce7; /* رنگ بار */
+.spinner {
+  margin: 10px auto;
+  width: 50px;
+  aspect-ratio: 1;
+  display: grid;
+  border: 4px solid #0000;
   border-radius: 50%;
-  animation: spin 1s linear infinite; /* انیمیشن چرخش */
+  border-right-color: #ed1ce7;
+  animation: l15 1s infinite linear;
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
+.spinner::before,
+.spinner::after {
+  content: "";
+  grid-area: 1/1;
+  margin: 2px;
+  border: inherit;
+  border-radius: 50%;
+  animation: l15 2s infinite;
+}
+
+.spinner::after {
+  margin: 8px;
+  animation-duration: 3s;
+}
+
+.loader {
+  color: white;
+  --w: 10ch;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 20px;
+  letter-spacing: var(--w);
+  width: var(--w);
+  overflow: hidden;
+  white-space: nowrap;
+  text-shadow: calc(-1 * var(--w)) 0, calc(-2 * var(--w)) 0,
+    calc(-3 * var(--w)) 0, calc(-4 * var(--w)) 0, calc(-5 * var(--w)) 0,
+    calc(-6 * var(--w)) 0, calc(-7 * var(--w)) 0, calc(-8 * var(--w)) 0,
+    calc(-9 * var(--w)) 0;
+  animation: l16 2s infinite;
+}
+
+.loader:before {
+  content: "Loading...";
+}
+
+@keyframes l16 {
+  20% {
+    text-shadow: calc(-1 * var(--w)) 0 pink, calc(-2 * var(--w)) 0 #ed1ce7,
+      calc(-3 * var(--w)) 0, calc(-4 * var(--w)) 0,
+      calc(-5 * var(--w)) 0 blueviolet, calc(-6 * var(--w)) 0,
+      calc(-7 * var(--w)) 0, calc(-8 * var(--w)) 0 grey, calc(-9 * var(--w)) 0;
   }
+  40% {
+    text-shadow: calc(-1 * var(--w)) 0 pink, calc(-2 * var(--w)) 0 #ed1ce7,
+      calc(-3 * var(--w)) 0 #e945e9, calc(-4 * var(--w)) 0,
+      calc(-5 * var(--w)) 0 grey, calc(-6 * var(--w)) 0 rgb(126, 126, 247),
+      calc(-7 * var(--w)) 0, calc(-8 * var(--w)) 0 grey, calc(-9 * var(--w)) 0;
+  }
+  60% {
+    text-shadow: calc(-1 * var(--w)) 0 lightblue, calc(-2 * var(--w)) 0,
+      calc(-3 * var(--w)) 0 #e945e9, calc(-4 * var(--w)) 0,
+      calc(-5 * var(--w)) 0 grey, calc(-6 * var(--w)) 0,
+      calc(-7 * var(--w)) 0 rgb(255, 180, 255), calc(-8 * var(--w)) 0 blueviolet,
+      calc(-9 * var(--w)) 0 #ed1ce7;
+  }
+  80% {
+    text-shadow: calc(-1 * var(--w)) 0 lightblue, calc(-2 * var(--w)) 0 purple,
+      calc(-3 * var(--w)) 0 #63fff4, calc(-4 * var(--w)) 0 blueviolet,
+      calc(-5 * var(--w)) 0 #ed1ce7, calc(-6 * var(--w)) 0,
+      calc(-7 * var(--w)) 0 grey, calc(-8 * var(--w)) 0 #63fff4,
+      calc(-9 * var(--w)) 0;
+  }
+}
+
+@keyframes l15 {
   100% {
-    transform: rotate(360deg);
+    transform: rotate(1turn);
   }
 }
 
 .errorMessage {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
   color: #ed1ce7;
-  height: 100px;
+  margin: 10px auto;
 }
 
-
-/* .selected-page {
-  background-color: aqua;
-  color: #241f32;
-} */
-
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 1000px) {
   .productWrapper {
     flex-direction: column;
     align-items: center;
   }
+}
+@media only screen and (max-width: 700px) {
+  
 
   .productItems {
     display: flex;
     justify-content: center;
     align-items: center;
   }
+
   .productItems ul {
     flex-direction: column;
   }
@@ -314,19 +363,23 @@ scale: 2rem;
   .productItems ul li {
     width: 15rem !important;
   }
+
   .productItems ul li img {
     width: 80% !important;
     border-radius: 10px;
     border: none;
   }
+
   .description {
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
+
   .description .icons {
     width: 100%;
   }
+
   .description p {
     text-align: center;
     font-size: 0.6rem;
@@ -346,25 +399,25 @@ scale: 2rem;
   flex-wrap: wrap;
 }
 
-.page2 .range{
+.page2 .range {
   height: 100%;
   position: relative;
 }
 
-.page2 #range-slider{
+.page2 #range-slider {
   font-family: Vazir;
 }
 
-.page2 .show-op, 
-.page2 .res-range{
-  font-size: .8rem;
+.page2 .show-op,
+.page2 .res-range {
+  font-size: 0.8rem;
 }
 
-.page2 .show-op{
+.page2 .show-op {
   color: #ed1ce7;
 }
 
-.page2 .range-in{
+.page2 .range-in {
   top: 200px;
   right: 10px;
   background-color: #241f32;
@@ -378,5 +431,6 @@ scale: 2rem;
   margin: auto;
 }
 
-.page2 .range-in div{
-  margin: 10px 0;}
+.page2 .range-in div {
+  margin: 10px 0;
+}
