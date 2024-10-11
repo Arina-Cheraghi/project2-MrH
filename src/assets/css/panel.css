@@ -44,6 +44,7 @@
   font-size: 10rem;
 }
 .prods {
+  flex-wrap: wrap;
   display: flex;
   justify-content: space-between;
   width: 90%;
@@ -51,13 +52,16 @@
 }
 
 .prods .prodd {
+  margin: 10px auto;
   background-color: rgb(46, 30, 72);
   padding: 10px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  max-width: 200px;
+  max-width: 220px;
+  min-width: 220px;
 }
 .prodd img {
   border-radius: 10px;

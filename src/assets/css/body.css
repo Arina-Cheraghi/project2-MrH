@@ -252,7 +252,7 @@ scale: 2rem;
 }
 
 .loading {
-  margin-top: 300px;
+  margin-top: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
