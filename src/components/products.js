@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import "../assets/css/body.css";
+import { useSearchParams, Link } from 'react-router-dom';
 import axios from 'axios';
-import { MdOutlineShoppingCart, MdFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
+import { MdOutlineShoppingCart, MdFavoriteBorder, MdOutlineFavorite, MdDone } from "react-icons/md";
 import anime from "../assets/img/anime.4d0a3171.png";
 import { HiChevronDoubleLeft } from "react-icons/hi";
 import ReactPaginate from 'react-paginate';
-import { Link } from "react-router-dom";
-import { MdDone } from "react-icons/md";
+import toast from 'react-hot-toast';
+import "../assets/css/body.css";
 
 const ProductList = ({ handleAddProduct, handleAddFavorite, favorites }) => {
     const [products, setProducts] = useState([]);
@@ -48,10 +48,17 @@ const ProductList = ({ handleAddProduct, handleAddFavorite, favorites }) => {
         fetchProducts();
     }, []);
 
+    useEffect(() => {
+        const savedPage = localStorage.getItem('currentPage');
+        if (savedPage) {
+            setItemOffset(Number(savedPage) * itemsPerPage);
+        }
+    }, []);
+
     const handlePageClick = (event) => {
         const newOffset = (event.selected * itemsPerPage) % products.length;
         setItemOffset(newOffset);
-        localStorage.setItem('currentPage', event.selected);
+        localStorage.setItem('currentPage', event.selected); 
     };
 
     const addProductToCart = (product) => {
@@ -68,9 +75,11 @@ const ProductList = ({ handleAddProduct, handleAddFavorite, favorites }) => {
 
         if (existingProductIndex > -1) {
             savedCart[existingProductIndex].quantity += 1;
+            toast.error("این محصول قبلاً به سبد خرید اضافه شده است.");
         } else {
             product.quantity = 1;
             savedCart.push(product);
+            toast.success("محصول با موفقیت به سبد خرید اضافه شد!");
         }
 
         localStorage.setItem("cartItems", JSON.stringify(savedCart));
@@ -167,12 +176,13 @@ const ProductList = ({ handleAddProduct, handleAddFavorite, favorites }) => {
                                     breakLabel="..."
                                     nextLabel=" >"
                                     onPageChange={handlePageClick}
-                                    pageRangeDisplayed={6}
+                                    pageRangeDisplayed={2}
                                     pageCount={pageCount}
                                     previousLabel="<"
                                     renderOnZeroPageCount={null}
                                     className="pagination"
                                     activeClassName="selected-page"
+                                    forcePage={Math.floor(itemOffset / itemsPerPage)} 
                                 />
                             </div>
                         </div>

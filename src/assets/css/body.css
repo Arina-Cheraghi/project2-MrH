@@ -104,8 +104,9 @@
 }
 
 .myProducts .productItems ul li {
-  max-height: 70px !important;
-  min-height: 440px;
+  /* max-height: 70px !important; */
+  min-width: 170px !important;
+  min-height: 490px;
   position: relative;
   padding: 10% 5%;
   background-color: #241f32;
@@ -153,6 +154,7 @@
 
 .myProducts .productItems ul li img {
   max-height: 200px;
+  border-radius: 10px;
 }
 
 .myProducts .productItems ul li h4 {
@@ -177,7 +179,7 @@
 
 .description {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   width: 100%;
 }
@@ -189,16 +191,20 @@
 .description .icons {
   display: flex;
   width: 75%;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .description .icons button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   color: aqua;
   background: none;
   border: 2px dotted aqua;
   border-radius: 5px;
   padding: 5px;
-  margin: 20px;
+  margin: 10px auto;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
@@ -219,33 +225,46 @@
   padding: 0;
   display: flex;
   justify-content: space-evenly;
-  width: 100%;
+  width: 50%;
   margin: auto;
   list-style-type: none;
-  border: 1px dashed #ed1ce7;
   border-radius: 5px;
 }
 
 .pag li {
-  padding: 5px 10px;
+  height: 25px;
+  width: 20px;
+  border: 2px dotted #ed1ce7;
+  padding:2px 5px;
   margin: 0;
-  border-radius: 100%;
+  border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .pag li a {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: small;
 }
 
 .pag li:hover {
   background-color: aqua;
-  color: #ed1ce7;
+  color: #100e16;
+  font-weight: bold;
 }
+
+.selected-page {
+  background-color: #ed1ce691; /* پس‌زمینه سفید */
+  color: #100e16; /* رنگ متن */
+  font-weight: bold; /* ضخیم کردن متن */
+  border: 2px dotted aqua !important;
+}
+
 
 .loading {
   display: flex;
@@ -342,18 +361,39 @@
 }
 
 @media only screen and (max-width: 1000px) {
-  .productWrapper {
+  .productWrapper{
+    flex-direction: column;
+    align-items: center;
+  }
+  .page2 .productItems ul {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  #page2-pag
+  .page2 ul li {
+    margin:0 auto;
+  }
+  .productItems {
     flex-direction: column;
     align-items: center;
   }
 }
 @media only screen and (max-width: 700px) {
-  
-
   .productItems {
     display: flex;
     justify-content: center;
+    align-items: flex-start;
+  }
+  .page2 .productItems ul {
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+  }
+  #page2-pag
+  .page2 ul li {
+    margin:0 auto;
+    /* min-width: 180px; */
   }
 
   .productItems ul {
@@ -366,7 +406,7 @@
 
   .productItems ul li img {
     width: 80% !important;
-    border-radius: 10px;
+    border-radius: 10px !important;
     border: none;
   }
 

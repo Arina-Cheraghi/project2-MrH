@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import "../assets/css/body.css";
 import axios from 'axios';
-import { FaEye } from "react-icons/fa";
-import { MdOutlineShoppingCart } from "react-icons/md";
+import toast from 'react-hot-toast';
+import { MdOutlineShoppingCart, MdOutlineFavorite, MdFavoriteBorder, MdDone } from "react-icons/md";
 import ReactPaginate from 'react-paginate';
 import PriceRangeSlider from './rangeSlider';
 
-const Page2 = () => {
+const Page2 = ({ handleAddProduct, handleAddFavorite, favorites }) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -31,11 +31,57 @@ const Page2 = () => {
         fetchProducts();
     }, []);
 
+    // بارگذاری صفحه فعلی از localStorage
+    useEffect(() => {
+        const savedPage = localStorage.getItem('currentPage2');
+        if (savedPage) {
+            setItemOffset(Number(savedPage) * itemsPerPage);
+        }
+    }, []);
+
+    const toggleFavorite = (product) => {
+        const exists = favorites.find(item => item.id === product.product_id);
+        if (exists) {
+            handleAddFavorite(null, product.product_id);
+        } else {
+            handleAddFavorite({
+                id: product.product_id,
+                name: product.name,
+                img: product.images.length > 0 ? product.images[0].image_link : '',
+            });
+        }
+    };
+
+    const addProductToCart = (product) => {
+        const updatedProducts = products.map(p => {
+            if (p.product_id === product.id) {
+                return { ...p, addedToCart: true };
+            }
+            return p;
+        });
+        setProducts(updatedProducts);
+
+        const savedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
+        const existingProductIndex = savedCart.findIndex(item => item.id === product.id);
+
+        if (existingProductIndex > -1) {
+            savedCart[existingProductIndex].quantity += 1;
+            toast("این محصول قبلاً به سبد خرید اضافه شده است.");
+        } else {
+            product.quantity = 1;
+            savedCart.push(product);
+            toast.success("محصول با موفقیت به سبد خرید اضافه شد!");
+        }
+
+        localStorage.setItem("cartItems", JSON.stringify(savedCart));
+        handleAddProduct(product);
+    };
+
     if (loading) return <div className='loading'></div>;
     if (error) return <div className='errorMessage'>Error: {error.message}</div>;
 
     const filteredProducts = products.filter(product => {
-        const price = product.features[0]?.price || 0; 
+        const price = product.features[0]?.price || 0;
         return price >= priceRange[0] && price <= priceRange[1];
     });
 
@@ -46,11 +92,12 @@ const Page2 = () => {
     const handlePageClick = (event) => {
         const newOffset = (event.selected * itemsPerPage) % filteredProducts.length;
         setItemOffset(newOffset);
+        localStorage.setItem('currentPage2', event.selected);
     };
 
     const rangeSelector = (event, newValue) => {
         setPriceRange(newValue);
-        setItemOffset(0); 
+        setItemOffset(0);
     };
 
     return (
@@ -81,17 +128,27 @@ const Page2 = () => {
                                                             <h4 className='product-title'> {product.name}</h4>
                                                             <h6 className='product-title'>
                                                                 {product.features[0]?.price ? (
-                                                                    <>
-                                                                        <>قیمت: {Number(product.features[0].price).toLocaleString()} تومان</>
-                                                                    </>
+                                                                    <>قیمت: {Number(product.features[0].price).toLocaleString()} تومان</>
                                                                 ) : (
                                                                     <span className='none'>ناموجود</span>
                                                                 )}
                                                             </h6>
-                                                            <div className='description'>
+                                                            <div className='description' id='pg2-icon'>
                                                                 <div className='icons'>
-                                                                    <a href='#'><FaEye /></a>
-                                                                    <a href='#'><MdOutlineShoppingCart /></a>
+                                                                    <button onClick={() => toggleFavorite(product)}>
+                                                                        {favorites.some(item => item.id === product.product_id) ? <MdOutlineFavorite /> : <MdFavoriteBorder />}
+                                                                    </button>
+                                                                    <button
+                                                                        onClick={() => addProductToCart({
+                                                                            id: product.product_id,
+                                                                            name: product.name,
+                                                                            img: mainImage,
+                                                                            price: product.features[0]?.price
+                                                                        })}
+                                                                        disabled={product.addedToCart}
+                                                                    >
+                                                                        {product.addedToCart ? <MdDone /> : <MdOutlineShoppingCart />}
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         </li>
@@ -101,18 +158,20 @@ const Page2 = () => {
                                         </ul>
                                     </div>
 
-                                    <div className='pag'>
+                                    <div className='pag' id='page2-pag'>
                                         <ReactPaginate
                                             breakLabel="..."
                                             nextLabel=" >"
-                                            onPageChange={handlePageClick} 
+                                            onPageChange={handlePageClick}
                                             pageRangeDisplayed={5}
                                             pageCount={pageCount}
                                             previousLabel="< "
                                             renderOnZeroPageCount={null}
+                                            activeClassName="selected-page" 
+                                            forcePage={Math.floor(itemOffset / itemsPerPage)}
                                         />
-
                                     </div>
+
                                 </div>
                             </div>
                         </div>

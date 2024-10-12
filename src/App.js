@@ -9,6 +9,8 @@ import Login from "./components/Login.js";
 import "./App.css";
 import Verify from "./components/Verify.js";
 import Panel from "./components/panel";
+import { Toaster } from 'react-hot-toast';
+
 
 const App = () => {
     const [cartItems, setCartItems] = useState(() => {
@@ -56,11 +58,11 @@ const App = () => {
         }
     };
 
-
     const [isFirstTime, setIsFirstTime] = useState(false);
 
     return (
         <BrowserRouter>
+            <Toaster />
             <div className="all">
                 <Routes>
                     <Route
@@ -83,11 +85,56 @@ const App = () => {
                             </>
                         }
                     />
-                    <Route path="/page2" element={<> <Header cartItems={cartItems} name={name} lastname={lastname} /> <Page2 /> <Footer /> </>} />
-                    <Route path="/ShoppingCart" element={<> <Header cartItems={cartItems} name={name} lastname={lastname} /> <ShoppingCart cartItems={cartItems} /> <Footer /> </>} />
-                    <Route path="/panel" element={<Panel name={name} setName={setName} lastname={lastname} setLastName={setLastName} favorites={favorites} handleAddFavorite={handleAddFavorite} />} />
+                    <Route
+                        path="/page2"
+                        element={
+                            <>
+                                <Header cartItems={cartItems} name={name} lastname={lastname} />
+                                <Page2
+                                    favorites={favorites}
+                                    handleAddFavorite={handleAddFavorite}
+                                    handleAddProduct={handleAddProduct} // پاس دادن تابع
+                                />
+                                <Footer />
+                            </>
+                        }
+                    />
+
+                    <Route
+                        path="/ShoppingCart"
+                        element={
+                            <>
+                                <Header cartItems={cartItems} name={name} lastname={lastname} />
+                                <ShoppingCart cartItems={cartItems} />
+                                <Footer />
+                            </>
+                        }
+                    />
+                    <Route
+                        path="/panel"
+                        element={
+                            <Panel
+                                name={name}
+                                setName={setName}
+                                lastname={lastname}
+                                setLastName={setLastName}
+                                favorites={favorites}
+                                handleAddFavorite={handleAddFavorite}
+                            />
+                        }
+                    />
                     <Route path="/Login" element={<Login />} />
-                    <Route path="/Verify" element={<Verify setIsFirstTime={setIsFirstTime} isFirstTime={isFirstTime} setName={setName} setLastName={setLastName} />} />
+                    <Route
+                        path="/Verify"
+                        element={
+                            <Verify
+                                setIsFirstTime={setIsFirstTime}
+                                isFirstTime={isFirstTime}
+                                setName={setName}
+                                setLastName={setLastName}
+                            />
+                        }
+                    />
                 </Routes>
             </div>
         </BrowserRouter>
