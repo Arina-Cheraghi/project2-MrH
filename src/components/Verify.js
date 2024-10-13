@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -15,6 +14,7 @@ const Verify = ({ isFirstTime, setIsFirstTime, setName, setLastName }) => {
   const [name, setNameLocal] = useState("");
   const [lastname, setLastNameLocal] = useState("");
   const [error, setError] = useState("");
+  const [isLogin, setIsLogin] = useState(false); 
 
   useEffect(() => {
     if (location.state && location.state.token) {
@@ -33,27 +33,28 @@ const Verify = ({ isFirstTime, setIsFirstTime, setName, setLastName }) => {
 
   const handleVerify = () => {
     axios
-        .post(`https://api.mrh-store.com/api/authorize/verify`, {
-            name,
-            lastname,
-            token,
-            code,
-        })
-        .then((response) => {
-            const { data } = response.data;
-            setToken(data);
-            localStorage.setItem("token", data);
-            localStorage.setItem("name", name);
-            localStorage.setItem("lastName", lastname);
-            localStorage.setItem("isLoggedIn", true);
-            setName(name);
-            setLastName(lastname);
-            navigate("/", { state: { name, lastname } });
-        })
-        .catch((error) => {
-            console.error(error);
-            setError("تایید ناموفق، لطفاً اطلاعات را بررسی کنید.");
-        });
+      .post(`https://api.mrh-store.com/api/authorize/verify`, {
+        name,
+        lastname,
+        token,
+        code,
+      })
+      .then((response) => {
+        const { data } = response.data;
+        setToken(data);
+        localStorage.setItem("token", data);
+        localStorage.setItem("name", name);
+        localStorage.setItem("lastName", lastname);
+        localStorage.setItem("isLoggedIn", true);
+        setName(name);
+        setLastName(lastname);
+        isLogin(true); 
+        navigate("/", { state: { name, lastname } });
+      })
+      .catch((error) => {
+        console.error(error);
+        setError("تایید ناموفق، لطفاً اطلاعات را بررسی کنید.");
+      });
   };
 
   return (
@@ -110,7 +111,7 @@ const Verify = ({ isFirstTime, setIsFirstTime, setName, setLastName }) => {
                   required
                 />
               </label>
-              {error && <p className="error">{error}</p>} 
+              {error && <p className="error">{error}</p>}
               <button type="submit">تایید</button>
             </form>
           </div>

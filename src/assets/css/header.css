@@ -125,12 +125,20 @@ h5 {
 }
 
 .input {
+  color: #31eee8;
   font-family: Vazir;
   background-color: #171420;
   width: 80%;
   padding: 10px 20px 10px 10px;
   border: 1px solid #ed1ce7;
   border-radius: 20px;
+transition: all .1s ease-in-out;
+}
+
+.input:focus {
+  outline: none; 
+  border: 2px solid #ed1ce7;
+
 }
 
 .input::placeholder {

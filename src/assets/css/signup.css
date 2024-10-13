@@ -184,3 +184,11 @@ button:hover {
 #phone{
   width: 100% !important;
 }
+
+.main-box p{
+  color: #ed1ce7;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: small;
+}

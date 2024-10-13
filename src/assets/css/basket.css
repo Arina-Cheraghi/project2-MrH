@@ -70,11 +70,19 @@
   border: none;
   color: rgba(127, 255, 212, 0.573);
   font-size: 1.4rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
 }
 
-.cart-items-header button:hover {
+.cart-items-header button:hover{
+  box-shadow: none;
+}
+
+.cart-items-header button svg{
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+}
+
+.cart-items-header button svg:hover {
   color: aqua;
   transform: scale(1.09);
 }

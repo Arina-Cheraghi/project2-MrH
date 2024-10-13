@@ -31,7 +31,6 @@ const Page2 = ({ handleAddProduct, handleAddFavorite, favorites }) => {
         fetchProducts();
     }, []);
 
-    // بارگذاری صفحه فعلی از localStorage
     useEffect(() => {
         const savedPage = localStorage.getItem('currentPage2');
         if (savedPage) {

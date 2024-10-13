@@ -11,7 +11,6 @@ import Verify from "./components/Verify.js";
 import Panel from "./components/panel";
 import { Toaster } from 'react-hot-toast';
 
-
 const App = () => {
     const [cartItems, setCartItems] = useState(() => {
         const savedCartItems = localStorage.getItem("cartItems");
@@ -74,12 +73,14 @@ const App = () => {
                                     name={name}
                                     lastname={lastname}
                                     setSearchQuery={setSearchQuery}
+                                    searchQuery={searchQuery}
                                 />
                                 <Body
                                     handleAddProduct={handleAddProduct}
                                     handleAddFavorite={handleAddFavorite}
                                     favorites={favorites}
                                     searchQuery={searchQuery}
+                                    setSearchQuery={setSearchQuery}
                                 />
                                 <Footer />
                             </>
@@ -93,19 +94,18 @@ const App = () => {
                                 <Page2
                                     favorites={favorites}
                                     handleAddFavorite={handleAddFavorite}
-                                    handleAddProduct={handleAddProduct} // پاس دادن تابع
+                                    handleAddProduct={handleAddProduct}
                                 />
                                 <Footer />
                             </>
                         }
                     />
-
                     <Route
                         path="/ShoppingCart"
                         element={
                             <>
                                 <Header cartItems={cartItems} name={name} lastname={lastname} />
-                                <ShoppingCart cartItems={cartItems} />
+                                <ShoppingCart cartItems={cartItems} setCartItems={setCartItems} />
                                 <Footer />
                             </>
                         }

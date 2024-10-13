@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { MdOutlineShoppingCart, MdFavoriteBorder, MdOutlineFavorite, MdDone } from "react-icons/md";
 import anime from "../assets/img/anime.4d0a3171.png";
@@ -8,13 +8,13 @@ import ReactPaginate from 'react-paginate';
 import toast from 'react-hot-toast';
 import "../assets/css/body.css";
 
-const ProductList = ({ handleAddProduct, handleAddFavorite, favorites }) => {
+const ProductList = ({ handleAddProduct, handleAddFavorite, favorites, setSearchQuery, searchQuery, isLogin }) => { 
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [itemOffset, setItemOffset] = useState(0);
     const itemsPerPage = 4;
-
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -56,12 +56,22 @@ const ProductList = ({ handleAddProduct, handleAddFavorite, favorites }) => {
     }, []);
 
     const handlePageClick = (event) => {
-        const newOffset = (event.selected * itemsPerPage) % products.length;
+        const newOffset = (event.selected * itemsPerPage) % filteredProducts.length;
         setItemOffset(newOffset);
-        localStorage.setItem('currentPage', event.selected); 
+        localStorage.setItem('currentPage', event.selected);
     };
 
     const addProductToCart = (product) => {
+        if (!product.price) {
+            toast.error("این محصول ناموجود است", {
+                style: {
+                    fontFamily: "Vazir",
+                    fontSize: "small"
+                },
+            });
+            return;
+        }
+
         const updatedProducts = products.map(p => {
             if (p.product_id === product.id) {
                 return { ...p, addedToCart: true };
@@ -75,11 +85,21 @@ const ProductList = ({ handleAddProduct, handleAddFavorite, favorites }) => {
 
         if (existingProductIndex > -1) {
             savedCart[existingProductIndex].quantity += 1;
-            toast.error("این محصول قبلاً به سبد خرید اضافه شده است.");
+            toast.error("این محصول قبلاً به سبد خرید اضافه شده است", {
+                style: {
+                    fontFamily: "Vazir",
+                    fontSize: "small"
+                },
+            });
         } else {
             product.quantity = 1;
             savedCart.push(product);
-            toast.success("محصول با موفقیت به سبد خرید اضافه شد!");
+            toast.success("محصول به سبد خرید اضافه شد", {
+                style: {
+                    fontFamily: "Vazir",
+                    fontSize: "small"
+                },
+            });
         }
 
         localStorage.setItem("cartItems", JSON.stringify(savedCart));
@@ -87,6 +107,11 @@ const ProductList = ({ handleAddProduct, handleAddFavorite, favorites }) => {
     };
 
     const toggleFavorite = (product) => {
+        if (!isLogin) {
+            navigate('/login'); 
+            return;
+        }
+
         const exists = favorites.find(item => item.id === product.product_id);
         if (exists) {
             handleAddFavorite(null, product.product_id);
@@ -107,9 +132,13 @@ const ProductList = ({ handleAddProduct, handleAddFavorite, favorites }) => {
     );
     if (error) return <div className='errorMessage'>{error.message}</div>;
 
+    const filteredProducts = products.filter(product =>
+        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     const endOffset = itemOffset + itemsPerPage;
-    const currentProducts = products.slice(itemOffset, endOffset);
-    const pageCount = Math.ceil(products.length / itemsPerPage);
+    const currentProducts = filteredProducts.slice(itemOffset, endOffset);
+    const pageCount = Math.ceil(filteredProducts.length / itemsPerPage);
 
     return (
         <div className='prdOut'>
@@ -123,7 +152,7 @@ const ProductList = ({ handleAddProduct, handleAddFavorite, favorites }) => {
                         </div>
                         <div className='prdPag'>
                             <div className='show_more'>
-                                <Link to="/page2">مشاهده همه محصولات<HiChevronDoubleLeft /></Link>
+                                <Link to="/page2">مشاهده رنج قیمت<HiChevronDoubleLeft /></Link>
                             </div>
                             <div className='page1'>
                                 <div className='productItems'>
@@ -176,13 +205,13 @@ const ProductList = ({ handleAddProduct, handleAddFavorite, favorites }) => {
                                     breakLabel="..."
                                     nextLabel=" >"
                                     onPageChange={handlePageClick}
-                                    pageRangeDisplayed={2}
+                                    pageRangeDisplayed={1}
                                     pageCount={pageCount}
                                     previousLabel="<"
                                     renderOnZeroPageCount={null}
                                     className="pagination"
                                     activeClassName="selected-page"
-                                    forcePage={Math.floor(itemOffset / itemsPerPage)} 
+                                    forcePage={Math.floor(itemOffset / itemsPerPage)}
                                 />
                             </div>
                         </div>
