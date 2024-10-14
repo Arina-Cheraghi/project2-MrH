@@ -8,7 +8,7 @@ import ReactPaginate from 'react-paginate';
 import toast from 'react-hot-toast';
 import "../assets/css/body.css";
 
-const ProductList = ({ handleAddProduct, handleAddFavorite, favorites, setSearchQuery, searchQuery, isLogin }) => { 
+const ProductList = ({ handleAddProduct, handleAddFavorite, favorites, setSearchQuery, searchQuery, isLogin }) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -108,7 +108,7 @@ const ProductList = ({ handleAddProduct, handleAddFavorite, favorites, setSearch
 
     const toggleFavorite = (product) => {
         if (!isLogin) {
-            navigate('/login'); 
+            navigate('/login');
             return;
         }
 
@@ -132,9 +132,17 @@ const ProductList = ({ handleAddProduct, handleAddFavorite, favorites, setSearch
     );
     if (error) return <div className='errorMessage'>{error.message}</div>;
 
-    const filteredProducts = products.filter(product =>
-        product.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    const filteredProducts = products.filter(product => {
+        const productName = product.name.toLowerCase();
+        const productPrice = product.features[0]?.price ? Number(product.features[0].price) : '';
+        const formattedPrice = productPrice.toLocaleString().replace(/,/g, '');
+
+        return productName.includes(searchQuery.toLowerCase()) ||
+            formattedPrice.includes(searchQuery.replace(/,/g, ''));
+    });
+
+
+
 
     const endOffset = itemOffset + itemsPerPage;
     const currentProducts = filteredProducts.slice(itemOffset, endOffset);

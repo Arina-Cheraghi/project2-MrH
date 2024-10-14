@@ -54,6 +54,7 @@ const Verify = ({ isFirstTime, setIsFirstTime, setName, setLastName }) => {
       .catch((error) => {
         console.error(error);
         setError("تایید ناموفق، لطفاً اطلاعات را بررسی کنید.");
+        navigate("/", { state: { name, lastname } });
       });
   };
 
