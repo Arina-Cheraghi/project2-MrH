@@ -109,19 +109,22 @@ const ProductList = ({ handleAddProduct, handleAddFavorite, favorites, setSearch
     const toggleFavorite = (product) => {
         if (!isLogin) {
             navigate('/login');
-            return;
-        }
-
-        const exists = favorites.find(item => item.id === product.product_id);
-        if (exists) {
-            handleAddFavorite(null, product.product_id);
+            // return;
         } else {
-            handleAddFavorite({
-                id: product.product_id,
-                name: product.name,
-                img: product.images.length > 0 ? product.images[0].image_link : '',
-            });
+            const exists = favorites.find(item => item.id === product.product_id);
+            if (exists) {
+                handleAddFavorite(null, product.product_id);
+            } else {
+                handleAddFavorite({
+                    id: product.product_id,
+                    name: product.name,
+                    img: product.images.length > 0 ? product.images[0].image_link : '',
+                });
+            }
         }
+        console.log('کاربر لاگین کرده:', isLogin);
+
+       
     };
 
     if (loading) return (
