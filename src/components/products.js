@@ -4,7 +4,6 @@ import axios from 'axios';
 import { MdOutlineShoppingCart, MdFavoriteBorder, MdOutlineFavorite, MdDone } from "react-icons/md";
 import anime from "../assets/img/anime.4d0a3171.png";
 import { HiChevronDoubleLeft } from "react-icons/hi";
-import ReactPaginate from 'react-paginate';
 import toast from 'react-hot-toast';
 import "../assets/css/body.css";
 
@@ -12,9 +11,13 @@ const ProductList = ({ handleAddProduct, handleAddFavorite, favorites, setSearch
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [itemOffset, setItemOffset] = useState(0);
+    const [currentPage, setCurrentPage] = useState(() => {
+        // Retrieve the current page from localStorage, defaulting to 0
+        return parseInt(localStorage.getItem('currentPage')) || 0;
+    });
     const itemsPerPage = 4;
     const navigate = useNavigate();
+
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -49,17 +52,83 @@ const ProductList = ({ handleAddProduct, handleAddFavorite, favorites, setSearch
     }, []);
 
     useEffect(() => {
-        const savedPage = localStorage.getItem('currentPage');
-        if (savedPage) {
-            setItemOffset(Number(savedPage) * itemsPerPage);
-        }
-    }, []);
+        // Save the current page to localStorage whenever it changes
+        localStorage.setItem('currentPage', currentPage);
+    }, [currentPage]);
 
-    const handlePageClick = (event) => {
-        const newOffset = (event.selected * itemsPerPage) % filteredProducts.length;
-        setItemOffset(newOffset);
-        localStorage.setItem('currentPage', event.selected);
+    const filteredProducts = products.filter(product => {
+        const productName = product.name.toLowerCase();
+        const productPrice = product.features[0]?.price ? Number(product.features[0].price) : '';
+        const formattedPrice = productPrice.toLocaleString().replace(/,/g, '');
+
+        return productName.includes(searchQuery.toLowerCase()) ||
+            formattedPrice.includes(searchQuery.replace(/,/g, ''));
+    });
+
+    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+    const currentProducts = filteredProducts.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
+
+    const handlePageChange = (direction) => {
+        if (direction === 'next' && currentPage < totalPages - 1) {
+            setCurrentPage(prevPage => prevPage + 1);
+        } else if (direction === 'prev' && currentPage > 0) {
+            setCurrentPage(prevPage => prevPage - 1);
+        }
     };
+
+    const jumpToPage = (pageNumber) => {
+        if (pageNumber >= 0 && pageNumber < totalPages) {
+            setCurrentPage(pageNumber);
+        }
+    };
+
+    const showPaginationButtons = () => {
+        const buttons = [];
+    
+        // Show first three pages
+        for (let i = 0; i < Math.min(3, totalPages); i++) {
+            buttons.push(
+                <button
+                    key={i}
+                    onClick={() => jumpToPage(i)}
+                    className={i === currentPage ? 'selected-page' : ''}
+                    disabled={i === currentPage}
+                >
+                    {i + 1}
+                </button>
+            );
+        }
+    
+        // Add "..." button if needed
+        if (totalPages > 6) {
+            buttons.push(
+                <button
+                    key="dots"
+                    onClick={() => setCurrentPage(currentPage + 3)}
+                    disabled={currentPage >= totalPages - 3}
+                >
+                    ...
+                </button>
+            );
+        }
+    
+        // Show last three pages
+        for (let i = Math.max(totalPages - 3, 3); i < totalPages; i++) {
+            buttons.push(
+                <button
+                    key={i}
+                    onClick={() => jumpToPage(i)}
+                    className={i === currentPage ? 'selected-page' : ''}
+                    disabled={i === currentPage}
+                >
+                    {i + 1}
+                </button>
+            );
+        }
+    
+        return buttons;
+    };
+    
 
     const addProductToCart = (product) => {
         if (!product.price) {
@@ -109,7 +178,7 @@ const ProductList = ({ handleAddProduct, handleAddFavorite, favorites, setSearch
     const toggleFavorite = (product) => {
         if (!isLogin) {
             navigate('/login');
-            // return;
+            return;
         } else {
             const exists = favorites.find(item => item.id === product.product_id);
             if (exists) {
@@ -122,9 +191,6 @@ const ProductList = ({ handleAddProduct, handleAddFavorite, favorites, setSearch
                 });
             }
         }
-        console.log('کاربر لاگین کرده:', isLogin);
-
-       
     };
 
     if (loading) return (
@@ -134,22 +200,6 @@ const ProductList = ({ handleAddProduct, handleAddFavorite, favorites, setSearch
         </div>
     );
     if (error) return <div className='errorMessage'>{error.message}</div>;
-
-    const filteredProducts = products.filter(product => {
-        const productName = product.name.toLowerCase();
-        const productPrice = product.features[0]?.price ? Number(product.features[0].price) : '';
-        const formattedPrice = productPrice.toLocaleString().replace(/,/g, '');
-
-        return productName.includes(searchQuery.toLowerCase()) ||
-            formattedPrice.includes(searchQuery.replace(/,/g, ''));
-    });
-
-
-
-
-    const endOffset = itemOffset + itemsPerPage;
-    const currentProducts = filteredProducts.slice(itemOffset, endOffset);
-    const pageCount = Math.ceil(filteredProducts.length / itemsPerPage);
 
     return (
         <div className='prdOut'>
@@ -210,20 +260,15 @@ const ProductList = ({ handleAddProduct, handleAddFavorite, favorites, setSearch
                                     </ul>
                                 </div>
                             </div>
-
                             <div className='pag'>
-                                <ReactPaginate
-                                    breakLabel="..."
-                                    nextLabel=" >"
-                                    onPageChange={handlePageClick}
-                                    pageRangeDisplayed={1}
-                                    pageCount={pageCount}
-                                    previousLabel="<"
-                                    renderOnZeroPageCount={null}
-                                    className="pagination"
-                                    activeClassName="selected-page"
-                                    forcePage={Math.floor(itemOffset / itemsPerPage)}
-                                />
+                                <div className='pagTitle'>
+                                    <button onClick={() => handlePageChange('prev')} disabled={currentPage === 0}>قبلی</button>
+                                    <span>صفحه {currentPage + 1} از {totalPages}</span>
+                                    <button onClick={() => handlePageChange('next')} disabled={currentPage === totalPages - 1}>بعدی</button>
+                                </div>
+                                <div className='page-buttons'>
+                                    {showPaginationButtons()}
+                                </div>
                             </div>
                         </div>
                     </div>

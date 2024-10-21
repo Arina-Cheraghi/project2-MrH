@@ -118,12 +118,11 @@
   width: 80%;
   cursor: pointer;
   border-radius: 5px;
-  transition:all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   border: 2px solid #241f32;
-
 }
 
-.myProducts .productItems ul li:hover{
+.myProducts .productItems ul li:hover {
   background-color: #221b33;
   border: 2px solid #ed1ce7;
 }
@@ -193,10 +192,31 @@
 
 .pag {
   display: flex;
-  width: 100%;
+  flex-direction: column;
+  width: 50%;
+  margin: auto;
   direction: ltr;
+  justify-content: center;
+  align-items: center;
 }
 
+.pag button {
+  font-family: Vazir;
+  background: none;
+  border: 1px dashed #e945e9;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+  transition: all .2s ease-in-out;
+}
+
+.page-buttons button {
+  width: 30px;
+  height: 30px;
+}
+
+/* 
 .pag ul {
   padding: 0;
   display: flex;
@@ -232,15 +252,14 @@
   background-color: rgba(0, 255, 255, 0.523);
   color: #100e16;
   font-weight: bold;
-}
+} */
 
 .selected-page {
-  background-color: #ed1ce691; /* پس‌زمینه سفید */
-  color: #100e16; /* رنگ متن */
+  background-color: #ed1ce691 !important; /* پس‌زمینه سفید */
+  color: #100e16 !important; /* رنگ متن */
   font-weight: bold; /* ضخیم کردن متن */
   border: 2px dotted aqua !important;
 }
-
 
 .loading {
   display: flex;
@@ -337,7 +356,7 @@
 }
 
 @media only screen and (max-width: 1000px) {
-  .productWrapper{
+  .productWrapper {
     flex-direction: column;
     align-items: center;
   }
@@ -346,9 +365,8 @@
     align-items: center;
     justify-content: center;
   }
-  #page2-pag
-  .page2 ul li {
-    margin:0 auto;
+  #page2-pag .page2 ul li {
+    margin: 0 auto;
   }
   .productItems {
     flex-direction: column;
@@ -366,9 +384,8 @@
     align-items: center;
     justify-content: center;
   }
-  #page2-pag
-  .page2 ul li {
-    margin:0 auto;
+  #page2-pag .page2 ul li {
+    margin: 0 auto;
     /* min-width: 180px; */
   }
 
@@ -401,7 +418,7 @@
     font-size: 0.6rem;
   }
 
-  .pag ul {
+  .pag {
     width: 100%;
     margin: 0;
   }
@@ -450,5 +467,3 @@
 .page2 .range-in div {
   margin: 10px 0;
 }
-
-

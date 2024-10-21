@@ -25,7 +25,7 @@ const App = () => {
     const [name, setName] = useState(() => localStorage.getItem("name") || '');
     const [lastname, setLastName] = useState(() => localStorage.getItem("lastName") || '');
     const [searchQuery, setSearchQuery] = useState("");
-    const [isLogin, setIsLogin] = useState(false); // وضعیت لاگین
+    const [isLogin, setIsLogin] = useState(false);
 
     useEffect(() => {
         localStorage.setItem("cartItems", JSON.stringify(cartItems));
@@ -122,6 +122,8 @@ const App = () => {
                                 setLastName={setLastName}
                                 favorites={favorites}
                                 handleAddFavorite={handleAddFavorite}
+                                cartItems={cartItems} // Pass cartItems
+                                setCartItems={setCartItems} // Pass setCartItems
                             />
                         }
                     />
@@ -134,7 +136,7 @@ const App = () => {
                                 isFirstTime={isFirstTime}
                                 setName={setName}
                                 setLastName={setLastName}
-                                setIsLogin={setIsLogin} // ارسال تابع تغییر وضعیت لاگین
+                                setIsLogin={setIsLogin} 
                             />
                         }
                     />
